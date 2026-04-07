@@ -37,33 +37,36 @@
 └── utils/                    # 工具函数、损失函数与核心配置文件
     ├── losses.py             # 攻防相关的自定义损失函数
     └── yamls/                # 丰富的实验配置文件，按防御策略及攻击类型分类归档
-🛠️ 快速开始 (Quick Start)
-1. 环境依赖
+```
+
+## 🛠️ 快速开始 (Quick Start)
+
+1. 环境依赖  
 建议使用 Python 3.8+ 及 PyTorch。安装必要的依赖项：
 
-Bash
+```bash
 pip install -r requirements.txt
-(请确保您的环境中已正确配置 PyTorch, torchvision, pyyaml, numpy 等常用科学计算包)
+```
 
-2. 运行实验
-实验的所有超参数和策略均由 utils/yamls/ 目录下的配置文件控制。例如，要运行我们的防御框架对抗 DBA（Distributed Backdoor Attack）攻击，可以直接通过命令行指定对应的 YAML 配置文件：
+（请确保您的环境中已正确配置 PyTorch, torchvision, pyyaml, numpy 等常用科学计算包）
 
-Bash
+2. 运行实验  
+实验的所有超参数和策略均由 `utils/yamls/` 目录下的配置文件控制。例如，要运行我们的防御框架对抗 DBA（Distributed Backdoor Attack）攻击，可以直接通过命令行指定对应的 YAML 配置文件：
+
+```bash
 python main.py --config utils/yamls/ours/params_dba_ours.yaml
-若需评估其他基线防御（例如使用 FLAME 防御 A3FL 攻击），只需替换配置文件的路径即可：
+```
 
-Bash
+若需评估其他基线防御（例如使用 FLAME 防御 A3FL 攻击），只需替换配置文件路径即可：
+
+```bash
 python main.py --config utils/yamls/flame/params_a3fl_Flame.yaml
-📊 实验结果 (Results Highlights)
+```
+
+## 📊 实验结果 (Results Highlights)
+
 在 CIFAR-10 和 Tiny-ImageNet 数据集上，本方法在以下维度均取得了领先的防御效果：
 
-高 TPR 与低 FPR：在高度 Non-IID 场景下，依然能够精准区分正常客户端与恶意客户端，避免误杀良性节点。
+- 高 TPR 与低 FPR：在高度 Non-IID 场景下，依然能够精准区分正常客户端与恶意客户端，避免误杀良性节点。
+- 卓越的 ASR 抑制：面对 Neurotoxin、Chameleon 等高级自适应后门攻击，能够在保持主任务准确率（Main Task Accuracy）稳定不降的同时，将攻击成功率（Attack Success Rate）降至极低水平。
 
-卓越的 ASR 抑制：面对 Neurotoxin、Chameleon 等高级自适应后门攻击，能够在保持主任务准确率（Main Task Accuracy）稳定不降的同时，将攻击成功率（Attack Success Rate）降至极低水平。
-
-📝 引用 (Citation)
-如果本项目对您的学术研究或工程实践有所帮助，欢迎 Star ⭐️ 本仓库！
-(论文正式录用后将在此更新详细的 BibTeX 引用格式)
-
-📄 许可证 (License)
-本项目采用 MIT License 许可协议。
